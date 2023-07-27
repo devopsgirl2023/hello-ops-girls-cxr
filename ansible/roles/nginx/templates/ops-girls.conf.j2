@@ -2,10 +2,13 @@
         listen       80;
         listen       [::]:80;
         server_name  "{{ domain_name }}";
-        root         /usr/share/nginx/html;
 
         location / {
-            proxy_pass http://localhost:8000/public/;
+            return 301 http://$host/public/;
+        }
+
+        location /public/ {
+            proxy_pass http://$host:8000/;
         }
 
         error_page 404 /404.html;

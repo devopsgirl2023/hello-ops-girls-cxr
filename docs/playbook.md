@@ -194,7 +194,7 @@ aws cloudformation validate-template --template-body file://cloudformation/stack
 部署（创建或更新）Stack：
 
 ```shell
-aws cloudformation deploy --stack-name devops-girls-<> --template-file cloudformation/stack.yaml --parameters ParameterKey=SecurityGroupName,ParameterValue=<> ParameterKey=KeyName,ParameterValue=<> ParameterKey=HostedZoneId,ParameterValue=<> ParameterKey=DomainName,ParameterValue=<> --no-cli-pager
+aws cloudformation deploy --stack-name devops-girls-<> --template-file cloudformation/stack.yaml --parameters SecurityGroupName=<> KeyName=<> HostedZoneId=<> DomainName=<> --capabilities CAPABILITY_NAMED_IAM --no-fail-on-empty-changeset --no-cli-pager
 ```
 
 获取 Stack 信息：
@@ -212,5 +212,10 @@ aws cloudformation delete-stack --stack-name devops-girls-<>
 与 GitHub Actions 集成：
 
 ```yaml
+# .github/workflows/prod-ci.yaml
 
+- name: apply cloudformation stack
+  run: ...
 ```
+
+Commit, voilà!
